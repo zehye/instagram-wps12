@@ -1,6 +1,7 @@
 from django.db import models
 from members.models import User
 
+
 class Post(models.Model):
     """
     인스타그램의 포스트
@@ -21,7 +22,7 @@ class PostImage(models.Model):
     포스트의 사진들
     """
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='posts/images')
 
 
 class PostComment(models.Model):
