@@ -16,6 +16,9 @@ class Post(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f'{self.author}가 {self.content}를 {self.created}에 작성했어요.'
+
 
 class PostImage(models.Model):
     """
