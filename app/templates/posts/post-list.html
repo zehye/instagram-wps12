@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Post List</h1>
-{{ user.is_authenticated }}
-
+    <h1>Post List</h1>
+    {% for post in posts %}
+        {{ post.author }}
+        {{ post.content }}
+        {{ post.created }}
+    {% endfor %}
 {% endblock %}
