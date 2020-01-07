@@ -6,6 +6,7 @@ class User(AbstractUser):
     """
     사용자 모델로 쓰입니다.
     """
+    img_profile = models.ImageField('프로필이미지', blank=True, upload_to='users/')
 
 
 
