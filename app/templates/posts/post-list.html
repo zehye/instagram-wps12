@@ -3,6 +3,12 @@
 {% block content %}
     <div>user: {{ request.user }}</div>
     <div>Authenticated: {{ request.user.is_autheticated }}</div>
+    
+    <div>
+        <form action="">
+            <a href="{% url 'members:login' %}">로그아웃</a>
+        </form>
+    </div>
     {% for post in posts %}
         <div>{{ post.author }}</div>
         <div>{{ post.created }}</div>
