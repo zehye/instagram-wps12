@@ -24,7 +24,7 @@ def post_like(request, pk):
     user = request.user
 
     post_like_qs = PostLike.objects.filter(user=user, post=post)
-    if post_like_qs.exist():
+    if post_like_qs.exists():
         post_like_qs.delete()
     else:
         PostLike.objects.create(post=post, user=user)
