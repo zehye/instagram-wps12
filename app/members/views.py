@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from .forms import LoginForm
 
 # 장고 기본 유저나 Cuser유저 모델 중, 사용중인
 User = get_user_model()
@@ -31,7 +32,12 @@ def login_view(request):
             return redirect('posts:post-list')
         else:
             return redirect('members:login')
-    return render(request, 'members/login.html')
+
+    form = LoginForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'members/login.html', context)
 
 
 def logout_view(request):
@@ -73,6 +79,5 @@ def signup_view(request):
         password=password,
         name=name,
     )
-
     login(request, user)
     return redirect('posts:post-list')
