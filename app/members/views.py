@@ -21,15 +21,11 @@ def login_view(request):
     :return:
     """
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        print('username:', username)
-        print('password:', password)
-        user = authenticate(request, username=username, password=password)
-        print('user:', user)
-        if user:
-            login(request, user)
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            form.login(request)
             return redirect('posts:post-list')
+
         else:
             return redirect('members:login')
 
