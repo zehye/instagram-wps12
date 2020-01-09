@@ -26,10 +26,9 @@ def login_view(request):
             form.login(request)
             return redirect('posts:post-list')
 
-        else:
-            return redirect('members:login')
+    else:
+        form = LoginForm()
 
-    form = LoginForm()
     context = {
         'form': form,
     }

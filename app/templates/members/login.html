@@ -16,11 +16,20 @@
                 <h1>Instagram</h1>
                 <form action="" method="POST">
                     {% csrf_token %}
+{#                    {{ form.errors }}#}
                     {% for field in form %}
                     <div>
                         {{ field }}
                     </div>
                     {% endfor %}
+
+                    {% if form.non_field_errors %}
+                        <ul class="list-unstyled text-danger">
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error|escape }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
 {#                    <div class="form-group">#}
 {#                        <input name="username" type="text" class="form-control" placeholder="유저네임">#}
 {#                    </div>#}

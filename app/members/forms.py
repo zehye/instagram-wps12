@@ -29,7 +29,7 @@ class LoginForm(forms.Form):
         password = self.cleaned_data['password']
         user = authenticate(username=username, password=password)
         if not user:
-            raise ValidationError('')
+            raise ValidationError('username 또는 password가 올바르지 않습니다.')
         return self.cleaned_data
 
     def login(self, request):
