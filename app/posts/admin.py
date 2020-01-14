@@ -26,10 +26,12 @@ class PostAdmin(admin.ModelAdmin):
     - 마찬가지로 PostComment 도 곧바로 추가할 수 있도록 한다.
     """
     list_display = ('author', 'content', 'created')
+    list_display_links = ('author', 'content')
     inlines = [
         PostImageInline,
         PostCommentInline,
     ]
+    readonly_fields = ('tags',)
 
 
 @admin.register(PostImage)
@@ -44,4 +46,9 @@ class PostCommentAdmin(admin.ModelAdmin):
 
 @admin.register(PostLike)
 class PostLikeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
     pass

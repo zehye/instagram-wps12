@@ -1,13 +1,15 @@
 from django.db import models
 from members.models import User
+import re
 
 
 class Post(models.Model):
     """
     인스타그램의 포스트
     """
+    TAG_PATTERN = re.compile(r'#(\w+)')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField(blank=True, null=True)
+    content = models.TextField(blank=True)
     like_user = models.ManyToManyField(
         # PostLike 를 통한 Many to Many 구현
         User,
@@ -15,9 +17,25 @@ class Post(models.Model):
         related_name='like_post_set',
     )
     created = models.DateTimeField(auto_now_add=True)
+    tags = models.ManyToManyField('Tag', verbose_name='해시태그 목록', related_query_name='posts', blank=True)
 
     def __str__(self):
         return f'{self.author}가 {self.content}를 {self.created}에 작성했어요.'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        tag_name_list = re.findall(self.TAG_PATTERN, self.content)
+        tags = [Tag.objects.get_or_create(name=tag_name)[0] for tag_name in tag_name_list]
+        # for tag_name in tag_name_list:
+        #     tag = Tag.objects.get_or_create(name=tag_name)[0]
+        self.tags.add(tags)
+        '''
+        post객체가 저장될 떄, content값을 분석해서 자신의 tags항목을 적절히 채워줌
+        ex) #Django #Python 이 온 경우, post.tags.all()시 name이 Django, Python 인 tag 2개 QuerySet이 리턴되어야 
+        
+        instance, created = Tag.objects.get_or_create(속성)
+        manyToManyField.set <- 쓰면 편합니다. 
+        '''
 
 
 class PostImage(models.Model):
@@ -46,3 +64,11 @@ class PostLike(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+

@@ -75,3 +75,4 @@ def comment_create(request, post_pk):
         if form.is_valid():
             form.save(post=post, author=request.user)
         return redirect('posts:post-list')
+
