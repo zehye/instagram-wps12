@@ -22,13 +22,32 @@ class Post(models.Model):
     def __str__(self):
         return f'{self.author}가 {self.content}를 {self.created}에 작성했어요.'
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
+    def _save_html(self):
+        """
+        content속성의 값을 사용해서 해시태그에 해당하는 문자열을 #태그로 바꾸어줌
+        :return: 해시태그가 a태그로 변환된 html
+        """
+        self.content_html = re.sub(
+            self.TAG_PATTERN,
+            r'<a href="/explore/tags/\g<1>/"#\g<1></a>',
+            self.content,
+        )
+
+    def _save_tags(self):
+        """
+        content에 포함된 해시태그 문자열(ex: #Python)의 tag들을 만들고
+        자신의 tags Many-to-Many field에 추가한다.
+        """
         tag_name_list = re.findall(self.TAG_PATTERN, self.content)
         tags = [Tag.objects.get_or_create(name=tag_name)[0] for tag_name in tag_name_list]
+        self.tags.set(tags)
+
+    def save(self, *args, **kwargs):
+        self._save_html()
+        super().save(*args, **kwargs)
+        self._save_tags()
         # for tag_name in tag_name_list:
         #     tag = Tag.objects.get_or_create(name=tag_name)[0]
-        self.tags.add(tags)
         '''
         post객체가 저장될 떄, content값을 분석해서 자신의 tags항목을 적절히 채워줌
         ex) #Django #Python 이 온 경우, post.tags.all()시 name이 Django, Python 인 tag 2개 QuerySet이 리턴되어야 
