@@ -68,6 +68,16 @@ class PostImage(models.Model):
 class PostComment(models.Model):
     """
     각 포스트의 댓글 (Many to one)
+
+    postcomment_set <- related name
+    반대쪽 객체에서 사용 post.postcommnet_set
+
+    postcomment <- related_quert_name
+    반대쪽 QuerySet의 filter조건 키워드명으로 사용 post.objects.filter(postcomment__)
+
+    기본값
+    related_name: 모델클래스명의 lowercase_set
+    related_query_name: 모델클래스명의 lowercase_
     """
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
