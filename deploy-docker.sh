@@ -15,10 +15,6 @@ ${SSH_CMD} -C 'sudo apt update && sudo DEBIAN_FRONTEND=noninteractive apt dist-u
 echo "apt install docker.io"
 ${SSH_CMD} -C 'sudo apt -y install docker.io'
 
-# pip freeze
-echo "pip freeze"
-"$HOME"/.pyenv/versions/wps-instagram-env/bin/pip freeze > "${ORIGIN_SOURCE}"/requirements.txt
-
 # docker build
 echo "docker build"
 docker build -t ${DOCKER_REPO} -f Dockerfile "${ORIGIN_SOURCE}"
@@ -40,6 +36,6 @@ ${SSH_CMD} -C 'screen -X -S docker quit'
 # screen 실행
 ${SSH_CMD} -C 'screen -S docker -d -m'
 # 실행중인 세션에 명령어 전달
-${SSH_CMD} -C "screen -r docker -X stuff 'sudo docker run --rm -it -p 80:8000 --name=instagram azelf/wps-instagram\n'"
+${SSH_CMD} -C "screen -r docker -X stuff 'sudo docker run --rm -it -p 80:8000 --name=instagram zehye/wps-instagram-12th\n'"
 
 echo "  finish!"

@@ -1,0 +1,7 @@
+boto3
+django<3
+django-extensions
+django-storges
+Pillow
+psycopg2-binary
+requests
