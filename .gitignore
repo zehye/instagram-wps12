@@ -5,6 +5,8 @@
 # media
 /.media
 
+secrets.json
+
 ### Django ###
 *.log
 *.pot
