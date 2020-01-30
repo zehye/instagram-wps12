@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 IDENTIFY_FILE="$HOME/.ssh/wps12th.pem"
-HOST="ubuntu@15.164.96.136"
+HOST="ubuntu@54.180.2.2"
 ORIGIN_SOURCE="$HOME/fastcampus/instagram"
 DEST_SOURCE="/home/ubuntu/projects/instagram"
 SSH_CMD="ssh -i ${IDENTIFY_FILE} ${HOST}"
