@@ -1,7 +1,10 @@
 boto3
 django<3
 django-extensions
-django-storges
+django-secrets-manager
+django-storages
 Pillow
 psycopg2-binary
 requests
+
+# pip install -r requirements/dev.txt
