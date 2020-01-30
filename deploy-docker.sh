@@ -17,6 +17,9 @@ ${SSH_CMD} -C 'sudo apt update && sudo DEBIAN_FRONTEND=noninteractive apt dist-u
 echo "apt install docker.io"
 ${SSH_CMD} -C 'sudo apt -y install docker.io'
 
+echo "poetry export"
+poetry export -f requirements.txt > requirements.txt
+
 # docker build
 echo "docker build"
 docker build -t ${DOCKER_REPO} -f Dockerfile "${ORIGIN_SOURCE}"
@@ -35,7 +38,7 @@ ${SSH_CMD} -C "sudo docker pull ${DOCKER_REPO}"
 echo "aws profile"
 ${SSH_CMD} -C "sudo rm -rf /home/ubuntu/.aws"
 echo "aws profileeeeeee"
-scp -i "${IDENTITY_FILE}" -r "$HOME/.aws/" ${TARGET}:/home/ubuntu/
+scp -i "${IDENTIFY_FILE}" -r "$HOME/.aws" ${TARGET}:/home/ubuntu/
 
 # screen에서 docker run
 echo "screen settings"

@@ -13,7 +13,7 @@ django-secrets-manager = "^0.1.7"
 django-storages = "^1.8"
 Pillow = "^7.0.0"
 requests = "^2.22.0"
-psycopg2-binary = "^2.8.4"
+gunicorn = "^20.0.4"
 
 [tool.poetry.dev-dependencies]
 notebook = "^6.0.3"
