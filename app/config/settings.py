@@ -9,8 +9,36 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+import json
 import os
+import boto3
+
+# from django_secrets import SECRETS
+#
+# AWS_SECRETS_MANAGER_SECRETS_NAME = 'zehye'
+# AWS_SECRETS_MANAGER_SECRETS_SECTION = 'instagram'
+# AWS_SECRETS_MANAGER_REGION_NAME = 'ap-northeast-2'
+# AWS_SECRETS_MANAGER_PROFILE = 'wps-secrets-manager'
+
+region_name = 'ap-northeast-2'
+
+session = boto3.session.Session(
+    profile_name='WPS-secretsManager',
+    region_name=region_name,
+)
+
+client = session.client(
+    service_name='secretsmanager',
+    region_name=region_name,
+)
+
+secret_string = client.get_secret_value(SecretId='wps')['SecretString']
+SECRETS = json.loads(secret_string)
+
+AWS_ACCESS_KEY_ID = SECRETS['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = SECRETS['AWS_SECRET_ACCESS_KEY']
+
+debug = True
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,8 +61,17 @@ MEDIA_URL = '/media/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
+SECRETS_DIR = os.path.join(ROOT_DIR, 'secrets.json')
+SECRETS = json.load(open(os.path.join(SECRETS_DIR)))
+
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME = 'wps12th-instagram-pjh'
+AWS_AUTO_CREATE_BUCKET = True
+AWS_S3_REGION_NAME = 'ap-northeast-2'
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ix_0sxc3fp&$8pm$#dgpl!0ut6_3g&c%n8(9zx$fs^n(q%cfn7'
+# SECRET_KEY = secrets['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -99,12 +136,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = SECRETS['DATABASES']
 
 
 # Password validation
