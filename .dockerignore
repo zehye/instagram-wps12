@@ -1,2 +1,5 @@
 /.media
 /.git
+/.static
+/secrets.json
+/deploy.sh

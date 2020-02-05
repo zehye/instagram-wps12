@@ -6,6 +6,7 @@
 
 # media
 /.media
+/.static
 
 secrets.json
 
