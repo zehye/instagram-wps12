@@ -9,22 +9,10 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
+import json
 import os
 
-SECRETS = {}
-
-# django-secrets-manager의 SECRETS를 사용해서 비밀 값 할당
-AWS_ACCESS_KEY_ID = SECRETS['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = SECRETS['AWS_SECRET_ACCESS_KEY']
-
-# django-storages | AWS S3
-AWS_STORAGE_BUCKET_NAME = 'wps12th-instagram-pjh'
-AWS_DEFAULT_ACL = 'private'
-AWS_AUTO_CREATE_BUCKET = True
-AWS_S3_REGION_NAME = 'ap-northeast-2'
-
 DEBUG = True
-SECRET_KEY = 'l4ux!g)8(18*h)02j*j)y-+@cy$_l-q$4%1b_#i3++(#+5nr$l'
 
 # instagram/app/
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,12 +26,29 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+
+# 각 application들의 static/폴더, STATICFILES_DIRS의 폴더들이 가진 정적파일
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(ROOT_DIR, '.static')
 
 # instagram/.media
 # User-uploaded static files의 기본 경로
 MEDIA_ROOT = os.path.join(ROOT_DIR, '.media')
 MEDIA_URL = '/media/'
+
+# secrets.json불러오기
+SECRETS = json.load(open(os.path.join(ROOT_DIR, 'secrets.json')))
+SECRET_KEY = SECRETS['SECRET_KEY']
+
+# django-secrets-manager의 SECRETS를 사용해서 비밀 값 할당
+AWS_ACCESS_KEY_ID = SECRETS['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = SECRETS['AWS_SECRET_ACCESS_KEY']
+
+# django-storages | AWS S3
+AWS_STORAGE_BUCKET_NAME = 'wps-instagram-pjh'
+AWS_DEFAULT_ACL = 'private'
+AWS_AUTO_CREATE_BUCKET = True
+AWS_S3_REGION_NAME = 'ap-northeast-2'
 
 # django-storages
 # Django의 FileStorage로 S3Boto3Storage(AWS의 S3)를 사용
@@ -52,9 +57,10 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '172.16.1.116',
+    '54.180.2.2',
     '*',
 ]
+
 AUTH_USER_MODEL = 'members.User'
 
 # Application definition
