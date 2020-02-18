@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import post_list, post_like, post_create, comment_create
+from ..views import post_list, post_like, post_create, comment_create
 
 app_name = 'posts'
 

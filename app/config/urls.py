@@ -22,6 +22,7 @@ from members.views import signup_view
 
 urlpatterns_apis = [
     path('members/', include('members.urls.apis')),
+    path('posts/', include('posts.urls.apis')),
 ]
 
 urlpatterns = [
@@ -29,7 +30,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', signup_view, name='signup'),
     path('members/', include('members.urls.views')),
-    path('posts/', include('posts.urls')),
+    path('posts/', include('posts.urls.views')),
 ]
 urlpatterns += static(
     prefix=settings.MEDIA_URL,
