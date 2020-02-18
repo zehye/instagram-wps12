@@ -12,7 +12,12 @@ COPY        . /srv/instagram
 WORKDIR     /srv/instagram/app
 
 # Nginx설정파일을 복사
+RUN         rm /etc/nginx/sites-enabled/default
 RUN         cp /srv/instagram/.config/instagram.nginx /etc/nginx/sites-enabled/
+
+# 로그폴더 생성
+RUN         mkdir /var/log/gunicorn
+CMD         /bin/bash
 
 # collectstatic
 #RUN         python manage.py collectstatic  --noinput
