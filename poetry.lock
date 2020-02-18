@@ -47,10 +47,10 @@ description = "The AWS SDK for Python"
 name = "boto3"
 optional = false
 python-versions = "*"
-version = "1.11.9"
+version = "1.12.1"
 
 [package.dependencies]
-botocore = ">=1.14.9,<1.15.0"
+botocore = ">=1.15.1,<1.16.0"
 jmespath = ">=0.7.1,<1.0.0"
 s3transfer = ">=0.3.0,<0.4.0"
 
@@ -60,13 +60,16 @@ description = "Low-level, data-driven core of boto 3."
 name = "botocore"
 optional = false
 python-versions = "*"
-version = "1.14.9"
+version = "1.15.1"
 
 [package.dependencies]
 docutils = ">=0.10,<0.16"
 jmespath = ">=0.7.1,<1.0.0"
 python-dateutil = ">=2.1,<3.0.0"
-urllib3 = ">=1.20,<1.26"
+
+[package.dependencies.urllib3]
+python = "<3.4.0 || >=3.5.0"
+version = ">=1.20,<1.26"
 
 [[package]]
 category = "main"
@@ -115,7 +118,7 @@ description = "A high-level Python Web framework that encourages rapid developme
 name = "django"
 optional = false
 python-versions = ">=3.5"
-version = "2.2.9"
+version = "2.2.10"
 
 [package.dependencies]
 pytz = "*"
@@ -131,7 +134,7 @@ description = "Extensions for Django"
 name = "django-extensions"
 optional = false
 python-versions = "*"
-version = "2.2.6"
+version = "2.2.8"
 
 [package.dependencies]
 six = ">=1.2"
@@ -141,8 +144,8 @@ category = "main"
 description = "Django SecretsManager is custom secret managers for Django"
 name = "django-secrets-manager"
 optional = false
-python-versions = "*"
-version = "0.1.7"
+python-versions = ">3.5"
+version = "0.1.10"
 
 [package.dependencies]
 boto3 = "*"
@@ -154,19 +157,29 @@ description = "Support for many storage backends in Django"
 name = "django-storages"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.8"
+version = "1.9.1"
 
 [package.dependencies]
 Django = ">=1.11"
 
 [package.extras]
 azure = ["azure-storage-blob (>=1.3.1,<12.0.0)"]
-boto = ["boto (>=2.32.0)"]
 boto3 = ["boto3 (>=1.4.4)"]
 dropbox = ["dropbox (>=7.2.1)"]
 google = ["google-cloud-storage (>=1.15.0)"]
 libcloud = ["apache-libcloud"]
 sftp = ["paramiko"]
+
+[[package]]
+category = "main"
+description = "Web APIs for Django, made easy."
+name = "djangorestframework"
+optional = false
+python-versions = ">=3.5"
+version = "3.11.0"
+
+[package.dependencies]
+django = ">=1.11"
 
 [[package]]
 category = "main"
@@ -249,7 +262,7 @@ description = "IPython: Productive Interactive Computing"
 name = "ipython"
 optional = false
 python-versions = ">=3.6"
-version = "7.11.1"
+version = "7.12.0"
 
 [package.dependencies]
 appnope = "*"
@@ -265,7 +278,7 @@ setuptools = ">=18.5"
 traitlets = ">=4.2"
 
 [package.extras]
-all = ["ipywidgets", "ipyparallel", "qtconsole", "ipykernel", "nbconvert", "notebook", "nbformat", "testpath", "pygments", "requests", "numpy (>=1.14)", "nose (>=0.10.1)", "Sphinx (>=1.3)"]
+all = ["ipyparallel", "requests", "notebook", "qtconsole", "ipywidgets", "pygments", "nbconvert", "testpath", "Sphinx (>=1.3)", "nbformat", "numpy (>=1.14)", "ipykernel", "nose (>=0.10.1)"]
 doc = ["Sphinx (>=1.3)"]
 kernel = ["ipykernel"]
 nbconvert = ["nbconvert"]
@@ -304,7 +317,7 @@ description = "A very fast and expressive template engine."
 name = "jinja2"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-version = "2.11.0"
+version = "2.11.1"
 
 [package.dependencies]
 MarkupSafe = ">=0.23"
@@ -366,8 +379,8 @@ category = "dev"
 description = "Jupyter core package. A base package on which Jupyter projects rely."
 name = "jupyter-core"
 optional = false
-python-versions = ">=2.7, !=3.0, !=3.1, !=3.2"
-version = "4.6.1"
+python-versions = "!=3.0,!=3.1,!=3.2,!=3.3,!=3.4,>=2.7"
+version = "4.6.2"
 
 [package.dependencies]
 pywin32 = ">=1.0"
@@ -474,7 +487,7 @@ description = "A Python Parser"
 name = "parso"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "0.6.0"
+version = "0.6.1"
 
 [package.extras]
 testing = ["docopt", "pytest (>=3.0.7)"]
@@ -634,10 +647,10 @@ description = "An Amazon S3 Transfer Manager"
 name = "s3transfer"
 optional = false
 python-versions = "*"
-version = "0.3.2"
+version = "0.3.3"
 
 [package.dependencies]
-botocore = ">=1.12.36,<2.0.0"
+botocore = ">=1.12.36,<2.0a.0"
 
 [[package]]
 category = "dev"
@@ -758,14 +771,14 @@ marker = "python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
-version = "2.1.0"
+version = "3.0.0"
 
 [package.extras]
 docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
-testing = ["jaraco.itertools"]
+testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "5228cd3c30aaca54e46210fc331732d31124ce265f534be29eba7803ca40109b"
+content-hash = "c3eb23465a46ed68d6e017aaff45063cb73a99950e5a6c9f499718a993fefcf5"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -786,12 +799,12 @@ bleach = [
     {file = "bleach-3.1.0.tar.gz", hash = "sha256:3fdf7f77adcf649c9911387df51254b813185e32b2c6619f690b593a617e19fa"},
 ]
 boto3 = [
-    {file = "boto3-1.11.9-py2.py3-none-any.whl", hash = "sha256:3480c87b530e7f41d9264a6725dda68208de2697822cf02cd3a541b001872410"},
-    {file = "boto3-1.11.9.tar.gz", hash = "sha256:05f7ae180813fbf11cb7397b43b6bd29463abdc246bee58127836f1a8f6a9a2f"},
+    {file = "boto3-1.12.1-py2.py3-none-any.whl", hash = "sha256:f1d5be915b806bd4335757040fb9741587b4b72bb85b9ee2fe91fe1d1655aa69"},
+    {file = "boto3-1.12.1.tar.gz", hash = "sha256:666bbcc7616b79e35d4ecb5fea3624d7812ec9d0bff13919501942af9e836d23"},
 ]
 botocore = [
-    {file = "botocore-1.14.9-py2.py3-none-any.whl", hash = "sha256:e3e3c0f59dc30c86dd2116aece3bd554f8476446cf1c5770bbf5111993d676c8"},
-    {file = "botocore-1.14.9.tar.gz", hash = "sha256:1909424c9544f92142c8e551888731e32a99f9c99cfe8d21fea3ec0c32981dae"},
+    {file = "botocore-1.15.1-py2.py3-none-any.whl", hash = "sha256:5cd1076e953eac0d2da3d499d8b6641e85fe62abe4ad9e40298b6826a3e95bcb"},
+    {file = "botocore-1.15.1.tar.gz", hash = "sha256:7f533d7ffcf4c3655bb2b37d6dbd2b067ba06074b9f186d66e8d6fcb90812987"},
 ]
 certifi = [
     {file = "certifi-2019.11.28-py2.py3-none-any.whl", hash = "sha256:017c25db2a153ce562900032d5bc68e9f191e44e9a0f762f373977de9df1fbb3"},
@@ -814,20 +827,24 @@ defusedxml = [
     {file = "defusedxml-0.6.0.tar.gz", hash = "sha256:f684034d135af4c6cbb949b8a4d2ed61634515257a67299e5f940fbaa34377f5"},
 ]
 django = [
-    {file = "Django-2.2.9-py3-none-any.whl", hash = "sha256:687c37153486cf26c3fdcbdd177ef16de38dc3463f094b5f9c9955d91f277b14"},
-    {file = "Django-2.2.9.tar.gz", hash = "sha256:662a1ff78792e3fd77f16f71b1f31149489434de4b62a74895bd5d6534e635a5"},
+    {file = "Django-2.2.10-py3-none-any.whl", hash = "sha256:9a4635813e2d498a3c01b10c701fe4a515d76dd290aaa792ccb65ca4ccb6b038"},
+    {file = "Django-2.2.10.tar.gz", hash = "sha256:1226168be1b1c7efd0e66ee79b0e0b58b2caa7ed87717909cd8a57bb13a7079a"},
 ]
 django-extensions = [
-    {file = "django-extensions-2.2.6.tar.gz", hash = "sha256:936e8e3962024d3c75ea54f4e0248002404ca7ca7fb698430e60b06b5555b4e7"},
-    {file = "django_extensions-2.2.6-py2.py3-none-any.whl", hash = "sha256:4524eca892d23fa6e93b0620901983b287ff5dc806f1b978d6a98541f06b9471"},
+    {file = "django-extensions-2.2.8.tar.gz", hash = "sha256:2699cc1d6fb4bd393c0b5832fea4bc685f2ace5800b3c9ff222b2080f161ac04"},
+    {file = "django_extensions-2.2.8-py2.py3-none-any.whl", hash = "sha256:1a03c4e8bade575f8c2be6c76456f8a2be3f9b02ab9f47d3535afa9562dc0493"},
 ]
 django-secrets-manager = [
-    {file = "django-secrets-manager-0.1.7.tar.gz", hash = "sha256:9c5713d0dca392d462c51c4cab33969c99dd8a0f7a59807b5f5a0da13083535e"},
-    {file = "django_secrets_manager-0.1.7-py3-none-any.whl", hash = "sha256:c687b10d2a69711d848ebd2c1691dad168e2f8eb76f79d0d221e19dfd81c72a2"},
+    {file = "django-secrets-manager-0.1.10.tar.gz", hash = "sha256:8f6b3e64bd7dcc499b633a94a9b2be4144d24247db959a90965a72d7906191f5"},
+    {file = "django_secrets_manager-0.1.10-py3-none-any.whl", hash = "sha256:ce760d540f68f5ebc1a9c575f5c29b0c10e9528bc2945504418deef2a2c3f1e8"},
 ]
 django-storages = [
-    {file = "django-storages-1.8.tar.gz", hash = "sha256:9322ab74ba6371e2e0fccc350c741686ade829e43085597b26b07ae8955a0a00"},
-    {file = "django_storages-1.8-py2.py3-none-any.whl", hash = "sha256:0a9b7e620e969fb0797523695329ed223bf540bbfdf6cd163b061fc11dab2d1c"},
+    {file = "django-storages-1.9.1.tar.gz", hash = "sha256:a59e9923cbce7068792f75344ed7727021ee4ac20f227cf17297d0d03d141e91"},
+    {file = "django_storages-1.9.1-py2.py3-none-any.whl", hash = "sha256:3103991c2ee8cef8a2ff096709973ffe7106183d211a79f22cf855f33533d924"},
+]
+djangorestframework = [
+    {file = "djangorestframework-3.11.0-py3-none-any.whl", hash = "sha256:05809fc66e1c997fd9a32ea5730d9f4ba28b109b9da71fccfa5ff241201fd0a4"},
+    {file = "djangorestframework-3.11.0.tar.gz", hash = "sha256:e782087823c47a26826ee5b6fa0c542968219263fb3976ec3c31edab23a4001f"},
 ]
 docutils = [
     {file = "docutils-0.15.2-py2-none-any.whl", hash = "sha256:9e4d7ecfc600058e07ba661411a2b7de2fd0fafa17d1a7f7361cd47b1175c827"},
@@ -855,8 +872,8 @@ ipykernel = [
     {file = "ipykernel-5.1.4.tar.gz", hash = "sha256:7f1f01df22f1229c8879501057877ccaf92a3b01c1d00db708aad5003e5f9238"},
 ]
 ipython = [
-    {file = "ipython-7.11.1-py3-none-any.whl", hash = "sha256:387686dd7fc9caf29d2fddcf3116c4b07a11d9025701d220c589a430b0171d8a"},
-    {file = "ipython-7.11.1.tar.gz", hash = "sha256:0f4bcf18293fb666df8511feec0403bdb7e061a5842ea6e88a3177b0ceb34ead"},
+    {file = "ipython-7.12.0-py3-none-any.whl", hash = "sha256:f6689108b1734501d3b59c84427259fd5ac5141afe2e846cfa8598eb811886c9"},
+    {file = "ipython-7.12.0.tar.gz", hash = "sha256:d9459e7237e2e5858738ff9c3e26504b79899b58a6d49e574d352493d80684c6"},
 ]
 ipython-genutils = [
     {file = "ipython_genutils-0.2.0-py2.py3-none-any.whl", hash = "sha256:72dd37233799e619666c9f639a9da83c34013a73e8bbc79a7a6348d93c61fab8"},
@@ -867,8 +884,8 @@ jedi = [
     {file = "jedi-0.16.0.tar.gz", hash = "sha256:d5c871cb9360b414f981e7072c52c33258d598305280fef91c6cae34739d65d5"},
 ]
 jinja2 = [
-    {file = "Jinja2-2.11.0-py2.py3-none-any.whl", hash = "sha256:6e7a3c2934694d59ad334c93dd1b6c96699cf24c53fdb8ec848ac6b23e685734"},
-    {file = "Jinja2-2.11.0.tar.gz", hash = "sha256:d6609ae5ec3d56212ca7d802eda654eaf2310000816ce815361041465b108be4"},
+    {file = "Jinja2-2.11.1-py2.py3-none-any.whl", hash = "sha256:b0eaf100007721b5c16c1fc1eecb87409464edc10469ddc9a22a27a99123be49"},
+    {file = "Jinja2-2.11.1.tar.gz", hash = "sha256:93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"},
 ]
 jmespath = [
     {file = "jmespath-0.9.4-py2.py3-none-any.whl", hash = "sha256:3720a4b1bd659dd2eecad0666459b9788813e032b83e7ba58578e48254e0a0e6"},
@@ -883,8 +900,8 @@ jupyter-client = [
     {file = "jupyter_client-5.3.4.tar.gz", hash = "sha256:60e6faec1031d63df57f1cc671ed673dced0ed420f4377ea33db37b1c188b910"},
 ]
 jupyter-core = [
-    {file = "jupyter_core-4.6.1-py2.py3-none-any.whl", hash = "sha256:464769f7387d7a62a2403d067f1ddc616655b7f77f5d810c0dd62cb54bfd0fb9"},
-    {file = "jupyter_core-4.6.1.tar.gz", hash = "sha256:a183e0ec2e8f6adddf62b0a3fc6a2237e3e0056d381e536d3e7c7ecc3067e244"},
+    {file = "jupyter_core-4.6.2-py2.py3-none-any.whl", hash = "sha256:e91785b8bd7f752711c0c20e5ec6ba0d42178d6321a61396082c55818991caee"},
+    {file = "jupyter_core-4.6.2.tar.gz", hash = "sha256:185dfe42800585ca860aa47b5fe0211ee2c33246576d2d664b0b0b8d22aacf3a"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},
@@ -941,8 +958,8 @@ pandocfilters = [
     {file = "pandocfilters-1.4.2.tar.gz", hash = "sha256:b3dd70e169bb5449e6bc6ff96aea89c5eea8c5f6ab5e207fc2f521a2cf4a0da9"},
 ]
 parso = [
-    {file = "parso-0.6.0-py2.py3-none-any.whl", hash = "sha256:1376bdc8cb81377ca481976933773295218a2df47d3e1182ba76d372b1acb128"},
-    {file = "parso-0.6.0.tar.gz", hash = "sha256:597f36de5102a8db05ffdf7ecdc761838b86565a4a111604c6e78beaedf1b045"},
+    {file = "parso-0.6.1-py2.py3-none-any.whl", hash = "sha256:951af01f61e6dccd04159042a0706a31ad437864ec6e25d0d7a96a9fbb9b0095"},
+    {file = "parso-0.6.1.tar.gz", hash = "sha256:56b2105a80e9c4df49de85e125feb6be69f49920e121406f15e7acde6c9dfc57"},
 ]
 pexpect = [
     {file = "pexpect-4.8.0-py2.py3-none-any.whl", hash = "sha256:0b48a55dcb3c05f3329815901ea4fc1537514d6ba867a152b581d69ae3710937"},
@@ -1097,8 +1114,8 @@ requests = [
     {file = "requests-2.22.0.tar.gz", hash = "sha256:11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4"},
 ]
 s3transfer = [
-    {file = "s3transfer-0.3.2-py2.py3-none-any.whl", hash = "sha256:2525bae2a530195576da53671bae8ca8c55ee8e33bc2225a65e804476611ea5a"},
-    {file = "s3transfer-0.3.2.tar.gz", hash = "sha256:4924e10451cc37901945806423d16c2c2040a6530645a614ed87e995ccec764c"},
+    {file = "s3transfer-0.3.3-py2.py3-none-any.whl", hash = "sha256:2482b4259524933a022d59da830f51bd746db62f047d6eb213f2f8855dcb8a13"},
+    {file = "s3transfer-0.3.3.tar.gz", hash = "sha256:921a37e2aefc64145e7b73d50c71bb4f26f46e4c9f414dc648c6245ff92cf7db"},
 ]
 send2trash = [
     {file = "Send2Trash-1.5.0-py3-none-any.whl", hash = "sha256:f1691922577b6fa12821234aeb57599d887c4900b9ca537948d2dac34aea888b"},
@@ -1150,6 +1167,6 @@ webencodings = [
     {file = "webencodings-0.5.1.tar.gz", hash = "sha256:b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923"},
 ]
 zipp = [
-    {file = "zipp-2.1.0-py3-none-any.whl", hash = "sha256:ccc94ed0909b58ffe34430ea5451f07bc0c76467d7081619a454bf5c98b89e28"},
-    {file = "zipp-2.1.0.tar.gz", hash = "sha256:feae2f18633c32fc71f2de629bfb3bd3c9325cd4419642b1f1da42ee488d9b98"},
+    {file = "zipp-3.0.0-py3-none-any.whl", hash = "sha256:12248a63bbdf7548f89cb4c7cda4681e537031eda29c02ea29674bc6854460c2"},
+    {file = "zipp-3.0.0.tar.gz", hash = "sha256:7c0f8e91abc0dc07a5068f315c52cb30c66bfbc581e5b50704c8a2f6ebae794a"},
 ]
