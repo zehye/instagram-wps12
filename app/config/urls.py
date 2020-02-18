@@ -21,14 +21,14 @@ from django.urls import path, include
 from members.views import signup_view
 
 urlpatterns_apis = [
-    path('members/', include('members.urls_apis')),
+    path('members/', include('members.urls.apis')),
 ]
 
 urlpatterns = [
     path('apis/', include(urlpatterns_apis)),
     path('admin/', admin.site.urls),
     path('', signup_view, name='signup'),
-    path('members/', include('members.urls')),
+    path('members/', include('members.urls.views')),
     path('posts/', include('posts.urls')),
 ]
 urlpatterns += static(
