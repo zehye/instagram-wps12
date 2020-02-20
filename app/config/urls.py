@@ -17,8 +17,20 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 
 from members.views import signup_view
+
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="WPS instagram API",
+        contace=openapi.Contact(email="zehye.01@gmail.com"),
+        default_version="v1",
+    ),
+    public=True
+)
 
 urlpatterns_apis = [
     path('members/', include('members.urls.apis')),
@@ -26,6 +38,7 @@ urlpatterns_apis = [
 ]
 
 urlpatterns = [
+    path('doc/', schema_view.with_ui('redoc', cache_timeout=0)),
     path('apis/', include(urlpatterns_apis)),
     path('admin/', admin.site.urls),
     path('', signup_view, name='signup'),
