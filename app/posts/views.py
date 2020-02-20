@@ -1,5 +1,6 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Post, PostLike, PostImage
+from .models import Post, PostLike, PostImage, PostComment
 from .forms import PostCreateForm, CommentCreateForm
 
 
@@ -117,3 +118,12 @@ def comment_create(request, post_pk):
         if form.is_valid():
             form.save(post=post, author=request.user)
         return redirect('posts:post-list')
+
+
+def comment_list(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    comments = post.postcomment_set.all()
+    context = {
+        'comments': comments
+    }
+    return redirect(request, 'posts/comment-list.html', context)
